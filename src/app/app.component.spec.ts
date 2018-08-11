@@ -15,12 +15,6 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  // TODO this test fails. Error message hard to read: "Expected undefined to equal 'Welcome to the Angular Testing Demo!'."
-  // it(`should have as title 'Welcome to the Angular Testing Demo!'`, async(() => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual('Welcome to the Angular Testing Demo!');
-  // }));
   it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();

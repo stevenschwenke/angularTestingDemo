@@ -1,0 +1,8 @@
+= AngularTestingDemo
+
+== Setup
+* setup explained in https://medium.com/@nerdic.coder/how-to-use-jest-unit-tests-with-angular-87509b500158[How to use Jest unit tests with Angular], https://github.com/nerdic-coder/jest-angular-demo[complete code at Github]
+
+== Why to use Jest
+* faster than Karma
+* better output when failing test (including parts source code)
