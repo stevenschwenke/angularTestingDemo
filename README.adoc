@@ -1,8 +1,39 @@
 = AngularTestingDemo
 
+* https://jestjs.io/en/
+
 == Setup
 * setup explained in https://medium.com/@nerdic.coder/how-to-use-jest-unit-tests-with-angular-87509b500158[How to use Jest unit tests with Angular], https://github.com/nerdic-coder/jest-angular-demo[complete code at Github]
+* make Jest accessible in terminal: _yarn global add jest_
+
+== Usage
+* simply run all tests: _jest_
+* run all tests and show only failing: _jest --silent_
+
+== Features
+=== Coverage
+* jest --coverage
+
+=== Watch Mode
+* jest --watch
+* looks for changes in background, runs tests automatically
+* difference to Karma: Jest will only run tests on changed files -> faster!
+
+=== Expect-API
+* https://github.com/facebook/jest/blob/master/docs/ExpectAPI.md
+
+=== Mocking included
+* https://github.com/facebook/jest/blob/master/docs/MockFunctions.md
 
 == Why to use Jest
-* faster than Karma
+* faster than Karma: Karma tests frontend in real browser, hence long startup time to build and start Karma server
 * better output when failing test (including parts source code)
+* needs less memory than Karma (only noticeable with hundreds of tests - however unexpected impediment later on)
+
+== Best Practices
+* always run watch mode
+* with Angular: use Testbed
+* keep away from DOM-testing (although Jest supports it)
+
+== Cheat Sheet
+* https://github.com/sapegin/jest-cheat-sheet/blob/master/Readme.md
