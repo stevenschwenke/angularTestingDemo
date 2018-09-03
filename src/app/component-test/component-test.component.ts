@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-component-test',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComponentTestComponent implements OnInit {
 
-  constructor() { }
+  answer;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  onAnswerGoodBoy() {
+    this.answer = 'You are!';
+  }
 }

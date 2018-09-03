@@ -24,7 +24,21 @@ describe('ComponentTestComponent', () => {
   });
 
   it('should ask the question who the good boy is', () => {
+
     const compiledTemplate = fixture.debugElement.nativeElement;
     expect(compiledTemplate.querySelector('p').textContent).toContain('Who is a good boy?');
+  });
+
+  it('should answer the question who the good boy is', () => {
+    const compiledTemplate = fixture.debugElement.nativeElement;
+
+    const button = compiledTemplate.querySelector('#button');
+    button.click();
+
+    // Sometimes necessary, even with fixture.detectChanges() in beforeEach()
+    fixture.detectChanges();
+
+    const answer = compiledTemplate.querySelector('#answer');
+    expect(answer.textContent).toBe('You are!');
   });
 });
