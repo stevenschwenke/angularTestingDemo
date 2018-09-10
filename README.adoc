@@ -1,5 +1,7 @@
 = AngularTestingDemo
 
+This repository contains a number of examples of how to test Angular applications. The different test examples are listed in _app.component.html_ and can be visited by starting the application.
+
 == Basic Frameworks
 
 === Jasmine
