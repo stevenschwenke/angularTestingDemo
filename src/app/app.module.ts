@@ -18,6 +18,9 @@ import { InnerComponentComponent } from './component-input-test/inner-component/
     ComponentInputTestComponent,
     InnerComponentComponent
   ],
+  exports: [
+    InnerComponentComponent
+  ],
   imports: [
     BrowserModule
   ],

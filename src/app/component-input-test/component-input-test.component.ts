@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ComponentInputTestComponent implements OnInit {
 
-  private answerForInnerComponent = 'You are!';
+  answerForInnerComponent = 'You are!';
 
   constructor() { }
 

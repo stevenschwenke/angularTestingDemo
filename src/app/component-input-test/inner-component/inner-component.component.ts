@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class InnerComponentComponent implements OnInit {
 
   @Input() answer: string;
-  private showAnswer = false;
+  showAnswer = false;
 
   constructor() {
   }
