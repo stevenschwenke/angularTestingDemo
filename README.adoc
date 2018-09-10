@@ -1,39 +1,133 @@
 = AngularTestingDemo
 
-* https://jestjs.io/en/
+== Basic Frameworks
 
-== Setup
+=== Jasmine
+* (together with Karma) default in Angular
+* behavior-driven test framework (attempts to describe tests in a human-readable form)
+* from the https://jasmine.github.io[documentation]:
+
+```javascript
+describe("A suite", function() {
+  it("contains spec with an expectation", function() {
+    expect(true).toBe(true);
+  });
+});
+```
+
+=== Karma
+* test runner
+* (together with Jasmine) default in Angular
+* https://codecraft.tv/courses/angular/unit-testing/jasmine-and-karma/[great explanation of how Jasmine and Karma run together]
+* spawns a browser in which tests are run
+* without Karma, Jasmine tests would have to be embedded manually in a HTML file and run by hand
+
+=== Jest
+* https://jestjs.io
+* test runner, alternative to Jasmine + Karma
+* based on Jasmine
+* like in Jasmine: https://jestjs.io/docs/en/api[global methods] like _it_ and _describe_:
+
+```javascript
+describe('Title', () => {
+
+  it('should not show empty-warning when page is loaded', () => {
+    const compiled: HTMLElement = fixture.nativeElement;
+    const title: HTMLDivElement = compiled.querySelector('#titleWarning');
+    expect(title).toBeNull();
+  });
+```
+
+=== Selenium / WebDriver
+* https://www.seleniumhq.org
+* end-to-end test framework, like Protractor
+* Selenium 2.x = merge of Selenium and WebDriver, two separate projects
+* Selenium API = in maintenance mode, probably not changed anymore
+* WebDriver = new API = driving a browser natively as a user would (locally or remote)
+* tests written in Java, C#, Python, ...
+* for example: https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/firefox/FirefoxDriver.html[Firefox driver], https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/chrome/ChromeDriver.html[Chrome driver]
+* manipulating browser directly through API to cause for example events
+* not that much documentation yet
+* example test (from https://saucelabs.com/resources/articles/getting-started-with-webdriver-selenium-for-java-in-eclipse[saucelabs.com])
+
+```java
+import static org.junit.Assert.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.junit.Test;
+public class CheckSauceLabsHomePage {
+
+@Test
+public void site_header_is_on_home_page() {
+
+    WebDriver browser = new FirefoxDriver();
+
+    //Firefox's proxy driver executable is in a folder already
+    //  on the host system's PATH environment variable.
+    browser.get("http://saucelabs.com");
+    WebElement header = browser.findElement(By.id("page-header"));
+    assertTrue((header.isDisplayed()));
+
+    browser.close();
+   }
+}
+```
+
+=== Protractor
+* https://www.protractortest.org/
+* end-to-end test framework, like WebDriver
+* = wrapper for WebDriver, specially for Angular applications
+* example test from website (_describe_- and _it_-syntax from Jasmine, _browser_ from Protractor)
+
+```javascript
+describe('angularjs homepage todo list', function() {
+  it('should add a todo', function() {
+    browser.get('https://angularjs.org');
+
+    element(by.model('todoList.todoText')).sendKeys('write first protractor test');
+    element(by.css('[value="add"]')).click();
+
+    var todoList = element.all(by.repeater('todo in todoList.todos'));
+    expect(todoList.count()).toEqual(3);
+    expect(todoList.get(2).getText()).toEqual('write first protractor test');
+
+    // You wrote your first test, cross it off the list
+    todoList.get(2).element(by.css('input')).click();
+    var completedAmount = element.all(by.css('.done-true'));
+    expect(completedAmount.count()).toEqual(2);
+  });
+});
+```
+
+* nice https://applitools.com/blog/protractor-vs-selenium-which-is-easier[article] about why to use Protractor instead of WebDriver
+
+== Jest
+* seen as "the better Jasmine/Karma" because
+** faster than Karma: Karma tests frontend in real browser, hence long startup time to build and start Karma server
+** better output when failing test (including parts source code)
+** needs less memory than Karma (only noticeable with hundreds of tests - however unexpected impediment later on)
+** watch mode in Jest lets you only run necessary tests instead of all (like in Karma)
+
+=== Setup
 * setup explained in https://medium.com/@nerdic.coder/how-to-use-jest-unit-tests-with-angular-87509b500158[How to use Jest unit tests with Angular], https://github.com/nerdic-coder/jest-angular-demo[complete code at Github]
 * make Jest accessible in terminal: _yarn global add jest_
 
-== Usage
+=== Usage
 * simply run all tests: _jest_
 * run all tests and show only failing: _jest --silent_
+* Watch-Mode = look for changes in background, run necessary tests continuously and show only failing: _jest --watch --silent_
+* show coverage: _jest --coverage_
 
-== Features
-=== Coverage
-* jest --coverage
+=== Features
+* expect-API: https://github.com/facebook/jest/blob/master/docs/ExpectAPI.md
+* Mocking included: https://github.com/facebook/jest/blob/master/docs/MockFunctions.md
 
-=== Watch Mode
-* jest --watch
-* looks for changes in background, runs tests automatically
-* difference to Karma: Jest will only run tests on changed files -> faster!
-
-=== Expect-API
-* https://github.com/facebook/jest/blob/master/docs/ExpectAPI.md
-
-=== Mocking included
-* https://github.com/facebook/jest/blob/master/docs/MockFunctions.md
-
-== Why to use Jest
-* faster than Karma: Karma tests frontend in real browser, hence long startup time to build and start Karma server
-* better output when failing test (including parts source code)
-* needs less memory than Karma (only noticeable with hundreds of tests - however unexpected impediment later on)
-
-== Best Practices
+=== Best Practices
 * always run watch mode
 * with Angular: use Testbed
 * keep away from DOM-testing (although Jest supports it)
 
-== Cheat Sheet
+=== Cheat Sheet
 * https://github.com/sapegin/jest-cheat-sheet/blob/master/Readme.md
