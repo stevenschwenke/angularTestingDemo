@@ -8,6 +8,9 @@ import { SimpleServiceTestComponent } from './simple-service-test/simple-service
 import {GoodBoyService} from './simple-service-test/good.boy.service';
 import { ComponentInputTestComponent } from './component-input-test/component-input-test.component';
 import { InnerComponentComponent } from './component-input-test/inner-component/inner-component.component';
+import { RoutingTestComponent } from './routing-test/routing-test.component';
+import { InnerRouteComponentComponent } from './routing-test/inner-route-component/inner-route-component.component';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
@@ -16,13 +19,17 @@ import { InnerComponentComponent } from './component-input-test/inner-component/
     ComponentTestComponent,
     SimpleServiceTestComponent,
     ComponentInputTestComponent,
-    InnerComponentComponent
+    InnerComponentComponent,
+    RoutingTestComponent,
+    InnerRouteComponentComponent
   ],
   exports: [
-    InnerComponentComponent
+    InnerComponentComponent,
+    InnerRouteComponentComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [
     GoodBoyService
